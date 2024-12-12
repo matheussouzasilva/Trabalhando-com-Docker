@@ -1,20 +1,21 @@
-# Usar a imagem base do Golang
+# Usar a imagem base do Go
 FROM golang:1.20
 
-# Definir o diretório de trabalho no container
+# Definir o diretório de trabalho do container
 WORKDIR /app
 
 # Copiar os arquivos de módulos primeiro
 COPY go.mod go.sum ./
 
+    #go.sum(Esse é um aquivo vazio, mas obrigatório para conseguir compilar)
+
 # Baixar dependências
 RUN go mod download
 
-# Copiar o restante dos arquivos
+# Copiar todo o restante dos arquivos
 COPY . .
 
-# Construir o executável
+# Construir o main.go
 RUN go build -o main .
 
-# Comando padrão para rodar o container
 CMD ["./main"]
